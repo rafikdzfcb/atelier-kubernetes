@@ -130,9 +130,18 @@ Les 3 réplicas sont répartis sur les **workers** (`agent-0` et `agent-1`) par 
 ## Exercice 6 — Portainer & Mario
 
 12. URL publique de votre Mario :
-    >
+    > https://reimagined-space-umbrella-g44r994rprpx29wvp-8585.app.github.dev/
 13. Retrouvez le Deployment `mario` en ligne de commande. Portainer et `kubectl` parlent-ils au même composant ? Lequel ?
-    >
+    >NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+mario   1/1     1            1           5m21s
+
+Le Deployment `mario`, créé via l'interface Portainer, apparaît bien en ligne de commande
+   > (1/1 pod prêt et disponible) : il est donc dans le cluster.
+   >
+   > **Portainer et `kubectl` parlent au même composant : l'API Server** du control plane.
+   > Portainer est seulement une interface graphique qui envoie ses requêtes à l'API Server,
+   > comme `kubectl`. L'état est stocké dans etcd, et le scheduler et les controllers créent
+   > les pods sur les workers. Il n'y a qu'une seule source de vérité, quel que soit l'outil.
 
 ## Bonus (facultatif)
 
